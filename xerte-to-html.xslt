@@ -28,7 +28,7 @@ SOFTWARE.
                 version="1.0">
     <xsl:output indent="no" method="html"/>
     
-    <xsl:variable name="FileLocation" select="'http://localhost/~stevewelburn/xertetoolkits_2.1/USER-FILES/17-guest2-Nottingham/'"/>
+    <xsl:param name="FileLocation"/>
     
     <!-- Setup the basic skeleton -->
     <xsl:template match="/">
