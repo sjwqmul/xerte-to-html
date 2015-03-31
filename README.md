@@ -7,5 +7,5 @@ Created and tested on a Mac.
 
 Usage:
 ```
-xsltproc xerte-to-xml.xslt /PATH-TO-XERTE/USER-FILES/PROJECT/data.xml >OUTPUT.html
+xsltproc --stringparam "FileLocation" "$FILELOCATION" xerte-to-html.xslt "$FILELOCATION/data.xml" >output.html
 ```
