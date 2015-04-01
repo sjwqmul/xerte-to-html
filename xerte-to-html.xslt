@@ -100,7 +100,7 @@ SOFTWARE.
         <morphimages><xsl:text>&#xa;</xsl:text>
         <xsl:call-template name="splitText">
             <xsl:with-param name="pText" select="./@text"/>
-            <xsl:with-param name="pElement" select="'narration'"/>
+            <xsl:with-param name="pElement" select="'p'"/>
         </xsl:call-template>
         <p>
         <xsl:value-of select="." disable-output-escaping="yes"/>
@@ -114,7 +114,7 @@ SOFTWARE.
         <tabnav><xsl:text>&#xa;</xsl:text>
         <xsl:call-template name="splitText">
             <xsl:with-param name="pText" select="./@text"/>
-            <xsl:with-param name="pElement" select="'narration'"/>
+            <xsl:with-param name="pElement" select="'p'"/>
         </xsl:call-template>
         <p>
         <xsl:value-of select="." disable-output-escaping="yes"/>
@@ -156,6 +156,8 @@ SOFTWARE.
         <hotspotImage><xsl:text>&#xa;</xsl:text>
         <xsl:call-template name="splitText">
             <xsl:with-param name="pText" select="./@text"/>
+            <xsl:with-param name="pSeparator" select="'&#xA;'"/>
+            <xsl:with-param name="pElement" select="'p'"/>
         </xsl:call-template>
         <xsl:call-template name="addImage">
             <xsl:with-param name="pPath" select="./@url"/>
@@ -182,6 +184,8 @@ SOFTWARE.
         <categories><xsl:text>&#xa;</xsl:text>
         <xsl:call-template name="splitText">
             <xsl:with-param name="pText" select="./@text"/>
+            <xsl:with-param name="pSeparator" select="'&#xA;'"/>
+            <xsl:with-param name="pElement" select="'p'"/>
         </xsl:call-template>
         <table><xsl:text>&#xa;</xsl:text>
             <tr><th>Category Name</th><th>Items</th></tr><xsl:text>&#xa;</xsl:text>
