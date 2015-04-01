@@ -143,11 +143,64 @@ SOFTWARE.
     
     <!-- Process Multiple Choice Options -->
     <xsl:template match="mcq/option">
-        <tr>
-        <td><xsl:value-of select="./@text" disable-output-escaping="yes"/></td>
-        <td><xsl:value-of select="./@feedback" disable-output-escaping="yes"/></td>
-        <td><xsl:value-of select="./@correct" disable-output-escaping="yes"/></td>
-        </tr>
+        <tr><xsl:text>&#xa;</xsl:text>
+        <td><xsl:value-of select="./@text" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td><xsl:value-of select="./@feedback" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td><xsl:value-of select="./@correct" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        </tr><xsl:text>&#xa;</xsl:text>
+    </xsl:template>
+    
+    <!-- Process Hotspot Image -->
+    <xsl:template match="hotspotImage">
+        <H2><xsl:value-of select="./@name" disable-output-escaping="yes"/></H2><xsl:text>&#xa;</xsl:text>
+        <hotspotImage><xsl:text>&#xa;</xsl:text>
+        <xsl:call-template name="splitText">
+            <xsl:with-param name="pText" select="./@text"/>
+        </xsl:call-template>
+        <xsl:call-template name="addImage">
+            <xsl:with-param name="pPath" select="./@url"/>
+            <xsl:with-param name="pTip" select="./@tip"/>
+        </xsl:call-template>
+        <table><xsl:text>&#xa;</xsl:text>
+            <tr><th>Name</th><th>Text</th></tr><xsl:text>&#xa;</xsl:text>
+            <xsl:apply-templates select="hotspot"/>
+        </table><xsl:text>&#xa;</xsl:text>
+        </hotspotImage><xsl:text>&#xa;</xsl:text>
+    </xsl:template>
+    
+    <!-- Process Image Hotspots -->
+    <xsl:template match="hotspotImage/hotspot">
+        <tr><xsl:text>&#xa;</xsl:text>
+        <td><xsl:value-of select="./@name" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td><xsl:value-of select="./@text" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        </tr><xsl:text>&#xa;</xsl:text>
+    </xsl:template>
+
+    <!-- Process Categories Activity -->
+    <xsl:template match="categories">
+        <H2><xsl:value-of select="./@name" disable-output-escaping="yes"/></H2><xsl:text>&#xa;</xsl:text>
+        <categories><xsl:text>&#xa;</xsl:text>
+        <xsl:call-template name="splitText">
+            <xsl:with-param name="pText" select="./@text"/>
+        </xsl:call-template>
+        <table><xsl:text>&#xa;</xsl:text>
+            <tr><th>Category Name</th><th>Items</th></tr><xsl:text>&#xa;</xsl:text>
+            <xsl:apply-templates select="category"/>
+        </table><xsl:text>&#xa;</xsl:text>
+        </categories><xsl:text>&#xa;</xsl:text>
+    </xsl:template>
+    
+    <!-- Process individual Categories -->
+    <xsl:template match="categories/category">
+        <tr><xsl:text>&#xa;</xsl:text>
+        <td><xsl:value-of select="./@name" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td><xsl:apply-templates select="item"/></td><xsl:text>&#xa;</xsl:text>
+        </tr><xsl:text>&#xa;</xsl:text>
+    </xsl:template>
+    
+    <!-- Process items within individual Categories -->
+    <xsl:template match="categories/category/item">
+        <xsl:value-of select="./@name" disable-output-escaping="yes"/><br/><xsl:text>&#xa;</xsl:text>
     </xsl:template>
     
     <!-- Process buttonQuestion -->
@@ -253,6 +306,9 @@ SOFTWARE.
         <p>Image location: <xsl:value-of select="$pPath" disable-output-escaping="yes"/></p><xsl:text>&#xa;</xsl:text>
         <p>
         <xsl:element name="img">
+            <xsl:attribute name="width">
+                <xsl:text>50%</xsl:text>
+            </xsl:attribute>
             <xsl:attribute name="src">
                 <xsl:value-of select="$FileLocation" disable-output-escaping="yes"/>
                 <xsl-text>/</xsl-text>
