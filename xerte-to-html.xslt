@@ -255,6 +255,7 @@ SOFTWARE.
         <xsl:element name="img">
             <xsl:attribute name="src">
                 <xsl:value-of select="$FileLocation" disable-output-escaping="yes"/>
+                <xsl-text>/</xsl-text>
                 <xsl:value-of select='translate(substring-after($pPath, "FileLocation + "), "&apos;", "")'/>
             </xsl:attribute>
             <xsl:attribute name="title">
