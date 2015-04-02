@@ -103,7 +103,10 @@ SOFTWARE.
             <xsl:with-param name="pElement" select="'narration'"/>
         </xsl:call-template>
         <p>
-        <xsl:text>URL: </xsl:text><xsl:value-of select="./@url" disable-output-escaping="yes"/>
+        <xsl:text>URL: </xsl:text><xsl:element name="a">
+            <xsl:attribute name="href"><xsl:value-of select="./@url" disable-output-escaping="yes"/></xsl:attribute>
+            <xsl:value-of select="./@url" disable-output-escaping="yes"/>
+        </xsl:element>
         </p>
         </wiki><xsl:text>&#xa;</xsl:text>
     </xsl:template>
