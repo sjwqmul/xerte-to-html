@@ -94,6 +94,20 @@ SOFTWARE.
         </youtube><xsl:text>&#xa;</xsl:text>
     </xsl:template>
     
+    <!-- Process Wiki content -->
+    <xsl:template match="wiki">
+        <H2><xsl:value-of select="./@name" disable-output-escaping="yes"/></H2><xsl:text>&#xa;</xsl:text>
+        <wiki><xsl:text>&#xa;</xsl:text>
+        <xsl:call-template name="splitText">
+            <xsl:with-param name="pText" select="./@text"/>
+            <xsl:with-param name="pElement" select="'narration'"/>
+        </xsl:call-template>
+        <p>
+        <xsl:text>URL: </xsl:text><xsl:value-of select="./@url" disable-output-escaping="yes"/>
+        </p>
+        </wiki><xsl:text>&#xa;</xsl:text>
+    </xsl:template>
+    
     <!-- Process morph images -->
     <xsl:template match="morphImages">
         <H2><xsl:value-of select="./@name" disable-output-escaping="yes"/></H2><xsl:text>&#xa;</xsl:text>
