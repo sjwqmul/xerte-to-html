@@ -230,7 +230,7 @@ SOFTWARE.
             <xsl:with-param name="pElement" select="'p'"/>
         </xsl:call-template>
         <table><xsl:text>&#xa;</xsl:text>
-            <tr><th>Category Name</th><th>Items</th></tr><xsl:text>&#xa;</xsl:text>
+            <tr><th width="25%">Category Name</th><th width="75%">Items</th></tr><xsl:text>&#xa;</xsl:text>
             <xsl:apply-templates select="category"/>
         </table><xsl:text>&#xa;</xsl:text>
         </categories><xsl:text>&#xa;</xsl:text>
