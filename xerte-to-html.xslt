@@ -122,6 +122,16 @@ SOFTWARE.
         </wiki><xsl:text>&#xa;</xsl:text>
     </xsl:template>
     
+    <!-- Process an embedded page -->
+    <xsl:template match="embedDiv">
+        <H2><xsl:value-of select="./@name" disable-output-escaping="yes"/></H2><xsl:text>&#xa;</xsl:text>
+        <embedDiv><xsl:text>&#xa;</xsl:text>
+        <p>
+        URL: <xsl:value-of select="./@src" disable-output-escaping="no"/>
+        </p>
+        </embedDiv><xsl:text>&#xa;</xsl:text>
+    </xsl:template>
+    
     <!-- Process morph images -->
     <xsl:template match="morphImages">
         <H2><xsl:value-of select="./@name" disable-output-escaping="yes"/></H2><xsl:text>&#xa;</xsl:text>
