@@ -26,6 +26,7 @@ SOFTWARE.
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fn="http://www.w3.org/2005/xpath-functions"
                 version="1.0">
+    <xsl:preserve-space elements="nestedPage"/>
     <xsl:output indent="no" method="html"/>
     
     <xsl:param name="FileLocation"/>
@@ -33,7 +34,17 @@ SOFTWARE.
     <!-- Setup the basic skeleton -->
     <xsl:template match="/">
         <html><xsl:text>&#xa;</xsl:text>
-            <head><title><xsl:value-of select="learningObject/@name" disable-output-escaping="yes"/></title></head>
+            <head><xsl:text>&#xa;</xsl:text>
+                <title><xsl:value-of select="learningObject/@name" disable-output-escaping="yes"/></title><xsl:text>&#xa;</xsl:text>
+                <xsl:comment>Style for proportionally spaced info. with embedded line breaks</xsl:comment><xsl:text>&#xa;</xsl:text>
+                <style><xsl:text>&#xa;</xsl:text>
+                p.prop {
+                    display: block;
+                    font-family: times;
+                    white-space: pre-line;
+                }
+                </style><xsl:text>&#xa;</xsl:text>
+            </head><xsl:text>&#xa;</xsl:text>
             <body><xsl:text>&#xa;</xsl:text>
                 <xsl:apply-templates/><xsl:text>&#xa;</xsl:text>
             </body><xsl:text>&#xa;</xsl:text>
@@ -330,17 +341,33 @@ SOFTWARE.
             </xsl:call-template>
         </xsl:if>
         <page><xsl:text>&#xa;</xsl:text>
+        <!--
+        <pre>
+        <xsl:value-of select="./@text" disable-output-escaping="yes"/>
+        </pre>
+        -->
         <xsl:apply-templates select="./@text"/>
         </page><xsl:text>&#xa;</xsl:text>
     </xsl:template>
 
     <!-- Process nested page text -->
     <xsl:template match="nestedPage/@text">
+        <!--
         <xsl:call-template name="splitText">
             <xsl:with-param name="pText" select="."/>
             <xsl:with-param name="pElement" select="'p'"/>
             <xsl:with-param name="pSeparator" select="'&#xA;'"/>
         </xsl:call-template>
+        <br/>
+        -->
+        <xsl:call-template name="textBlock">
+            <xsl:with-param name="pText" select="."/>
+        </xsl:call-template>
+        <!--
+        <pre>
+        <xsl:value-of select="." disable-output-escaping="yes"/>
+        </pre>
+        -->
     </xsl:template>
     
 
@@ -368,6 +395,20 @@ SOFTWARE.
     </xsl:template>
     
     <!-- Process newlines -->
+    <xsl:template name="textBlock">
+        <xsl:param name="pText" select="."/>
+        <xsl:param name="pElement" select="'textblock'"/>
+        <xsl:param name="pSeparator" select="'&#xA;&#xA;'"/>
+        <xsl:element name="{$pElement}"><xsl:text>&#xa;</xsl:text>
+        <xsl:element name="p">
+        <xsl:attribute name="class"><xsl:text>prop</xsl:text></xsl:attribute>
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:value-of select="normalize-space($pText)" disable-output-escaping="yes"/><xsl:text>&#xa;</xsl:text>
+        </xsl:element>
+        </xsl:element><xsl:text>&#xa;</xsl:text>
+    </xsl:template>
+ 
+    <!-- Process newlines -->
     <xsl:template name="splitText">
         <xsl:param name="pText" select="."/>
         <xsl:param name="pElement" select="'textblock'"/>
@@ -388,5 +429,4 @@ SOFTWARE.
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
- 
-</xsl:stylesheet>
+ </xsl:stylesheet>
