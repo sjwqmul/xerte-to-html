@@ -43,6 +43,10 @@ SOFTWARE.
                     font-family: times;
                     white-space: pre-line;
                 }
+                .bordered {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                }
                 </style><xsl:text>&#xa;</xsl:text>
             </head><xsl:text>&#xa;</xsl:text>
             <body><xsl:text>&#xa;</xsl:text>
@@ -165,26 +169,33 @@ SOFTWARE.
     <xsl:template match="mcq">
         <H2><xsl:value-of select="./@name" disable-output-escaping="yes"/></H2><xsl:text>&#xa;</xsl:text>
         <mcq><xsl:text>&#xa;</xsl:text>
-        <p><xsl:value-of select="./@instruction" disable-output-escaping="yes"/> [[instructions]]</p><xsl:text>&#xa;</xsl:text>
-        <H3><xsl:value-of select="./@prompt" disable-output-escaping="yes"/> [[prompt]]</H3><xsl:text>&#xa;</xsl:text>
         <table>
-            <tr><th>Text</th><th>Feedback</th><th>Correct</th></tr>
+            <td width="20%">
+        <p><xsl:value-of select="./@instruction" disable-output-escaping="yes"/></p><xsl:text>&#xa;</xsl:text>
+        </td>
+        <td>
+        <H3><xsl:value-of select="./@prompt" disable-output-escaping="yes"/></H3><xsl:text>&#xa;</xsl:text>
+        <table class="bordered">
+            <tr><th width="20%" class="bordered">Text</th><th width="70%" class="bordered">Feedback</th><th width="10%" class="bordered">Correct</th></tr>
             <xsl:apply-templates select="option"/>
         </table>
-        <p>Type: <xsl:value-of select="./@type" disable-output-escaping="yes"/></p><xsl:text>&#xa;</xsl:text>
+        </td>
+        </table>
+        <p>[[Type: <xsl:value-of select="./@type" disable-output-escaping="yes"/>]]</p><xsl:text>&#xa;</xsl:text>
 <!--        <xsl:call-template name="splitText">
             <xsl:with-param name="pText" select="./@text"/>
             <xsl:with-param name="pElement" select="'narration'"/>
         </xsl:call-template>
 -->     </mcq><xsl:text>&#xa;</xsl:text>
+        
     </xsl:template>
     
     <!-- Process Multiple Choice Options -->
     <xsl:template match="mcq/option">
         <tr><xsl:text>&#xa;</xsl:text>
-        <td><xsl:value-of select="./@text" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
-        <td><xsl:value-of select="./@feedback" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
-        <td><xsl:value-of select="./@correct" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td class="bordered"><xsl:value-of select="./@text" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td class="bordered"><xsl:value-of select="./@feedback" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td class="bordered"><xsl:value-of select="./@correct" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
         </tr><xsl:text>&#xa;</xsl:text>
     </xsl:template>
     
