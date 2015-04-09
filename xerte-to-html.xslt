@@ -236,8 +236,8 @@ SOFTWARE.
             <xsl:with-param name="pSeparator" select="'&#xA;'"/>
             <xsl:with-param name="pElement" select="'p'"/>
         </xsl:call-template>
-        <table><xsl:text>&#xa;</xsl:text>
-            <tr><th>Question</th><th>Answer</th><th>Hint</th></tr><xsl:text>&#xa;</xsl:text>
+        <table class="bordered"><xsl:text>&#xa;</xsl:text>
+            <tr><th class="bordered">Question</th><th class="bordered">Answer</th><th class="bordered">Hint</th></tr><xsl:text>&#xa;</xsl:text>
             <xsl:apply-templates select="dialogStep"/>
         </table><xsl:text>&#xa;</xsl:text>
         </hotspotImage><xsl:text>&#xa;</xsl:text>
@@ -246,9 +246,9 @@ SOFTWARE.
     <!-- Process Dialog Steps -->
     <xsl:template match="dialog/dialogStep">
         <tr><xsl:text>&#xa;</xsl:text>
-        <td width="40%"><xsl:value-of select="./@question" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
-        <td width="20%"><xsl:value-of select="./@answer" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
-        <td width="40%"><xsl:value-of select="./@hint" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td width="40%" class="bordered"><xsl:value-of select="./@question" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td width="20%" class="bordered"><xsl:value-of select="./@answer" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
+        <td width="40%" class="bordered"><xsl:value-of select="./@hint" disable-output-escaping="yes"/></td><xsl:text>&#xa;</xsl:text>
         </tr><xsl:text>&#xa;</xsl:text>
     </xsl:template>
 
@@ -285,10 +285,13 @@ SOFTWARE.
     <xsl:template match="buttonQuestion">
         <H2><xsl:value-of select="./@name" disable-output-escaping="yes"/></H2><xsl:text>&#xa;</xsl:text>
         <buttonQuestion><xsl:text>&#xa;</xsl:text>
-        Instructions: <xsl:value-of select="./@instruction" disable-output-escaping="yes"/><br/><xsl:text>&#xa;</xsl:text>
-        Prompt: <xsl:value-of select="./@prompt" disable-output-escaping="yes"/><br/><xsl:text>&#xa;</xsl:text>
-        Feedback: <xsl:value-of select="./@feedback" disable-output-escaping="yes"/><br/><xsl:text>&#xa;</xsl:text>
-<!--        <xsl:call-template name="splitText">
+        <h3>Instructions</h3>
+        <xsl:value-of select="./@instruction" disable-output-escaping="yes"/><br/><xsl:text>&#xa;</xsl:text>
+        <h3>Prompt</h3>
+        <xsl:value-of select="./@prompt" disable-output-escaping="yes"/><br/><xsl:text>&#xa;</xsl:text>
+        <h3>Feedback</h3>
+        <xsl:value-of select="./@feedback" disable-output-escaping="yes"/><br/><xsl:text>&#xa;</xsl:text>
+ <!--        <xsl:call-template name="splitText">
             <xsl:with-param name="pText" select="./@text"/>
             <xsl:with-param name="pElement" select="'narration'"/>
         </xsl:call-template>
