@@ -408,7 +408,9 @@ SOFTWARE.
         <xsl:param name="pPath" select="''"/>
         <xsl:param name="pTip" select="''"/>
         <xsl:param name="pWidth" select="'50%'"/>
+        <xsl:if test="$pTip != ''">
         <p>Tip: <xsl:value-of select="$pTip" disable-output-escaping="yes"/></p><xsl:text>&#xa;</xsl:text>
+        </xsl:if>
         <p>Image location: <xsl:value-of select="$pPath" disable-output-escaping="yes"/></p><xsl:text>&#xa;</xsl:text>
         <p>
         <xsl:element name="img">
