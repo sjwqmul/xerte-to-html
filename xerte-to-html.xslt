@@ -147,6 +147,14 @@ SOFTWARE.
         <p>
         <xsl:value-of select="." disable-output-escaping="yes"/>
         </p>
+        <H3>Image 1</H3>
+        <xsl:call-template name="addImage">
+            <xsl:with-param name="pPath" select="./@url"/>
+        </xsl:call-template>
+        <H3>Image 2</H3>
+        <xsl:call-template name="addImage">
+            <xsl:with-param name="pPath" select="./@url2"/>
+        </xsl:call-template>
         </morphimages><xsl:text>&#xa;</xsl:text>
     </xsl:template>
     
@@ -399,12 +407,13 @@ SOFTWARE.
     <xsl:template name="addImage">
         <xsl:param name="pPath" select="''"/>
         <xsl:param name="pTip" select="''"/>
+        <xsl:param name="pWidth" select="'50%'"/>
         <p>Tip: <xsl:value-of select="$pTip" disable-output-escaping="yes"/></p><xsl:text>&#xa;</xsl:text>
         <p>Image location: <xsl:value-of select="$pPath" disable-output-escaping="yes"/></p><xsl:text>&#xa;</xsl:text>
         <p>
         <xsl:element name="img">
             <xsl:attribute name="width">
-                <xsl:text>50%</xsl:text>
+                <xsl:value-of select="$pWidth" disable-output-escaping="yes"/>
             </xsl:attribute>
             <xsl:attribute name="src">
                 <xsl:value-of select="$FileLocation" disable-output-escaping="yes"/>
